@@ -4,7 +4,7 @@
 
 	<groupId>genome</groupId>
 	<artifactId>viewer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>genome</name>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>casmi</groupId>
 			<artifactId>casmi</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	
