@@ -16,10 +16,8 @@
  * limitations under the License.
  */
 
-package genome.net;
+package jp.xcoo.casmi.cytobandview.net;
 
-import genome.data.Chromosome;
-import genome.data.Cytoband;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +25,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.xcoo.casmi.cytobandview.data.Chromosome;
+import jp.xcoo.casmi.cytobandview.data.Cytoband;
+
 import casmi.io.Reader;
-import casmi.net.HTTP;
-import casmi.parser.CSV;
+import casmi.io.net.HTTP;
+import casmi.io.parser.CSV;
 import casmi.util.FileUtil;
 
 /**

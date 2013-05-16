@@ -17,7 +17,7 @@
  */
 
 
-package genome.data;
+package jp.xcoo.casmi.cytobandview.data;
 
 
 /**
