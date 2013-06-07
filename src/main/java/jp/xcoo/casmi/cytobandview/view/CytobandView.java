@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-  
+
 package jp.xcoo.casmi.cytobandview.view;
 
 
@@ -41,7 +41,7 @@ import casmi.graphics.group.Group;
 /**
  * cytoband view
  * Class for viewer for cytoband (Human Genome. UCSC hg.19)
- * 
+ *
  * @author K. Nishimura
  * @author Takashi AOKI <federkasten@me.com>
  *
@@ -50,36 +50,37 @@ import casmi.graphics.group.Group;
 public class CytobandView extends Applet {
 
 	private static final String TITLE_NAME = "Cytoband View";
-	
+
 	private static final String REMOTE_DATA_URL = "http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz";
-	
+
 	private Font f;
     private Text out;
-    
+
     private final double X_STEP = 40;
-    
+
     private List<CytobandElement> bandElementList = new ArrayList<CytobandElement>();
-    
+
     boolean selected;
-    
+
     @Override
     public void setup() {
         setSize(1024, 768);
         setFPS(30.0);
 
     	final Map<String, Chromosome> chrMap = CytobandLoader.load(REMOTE_DATA_URL);
-    	
+
     	Group elementGroup = new Group();
-    	
+
     	// build render elements
     	for( String name : Chromosome.CHROMOSOME_NAMES ) {
     		Chromosome chr = chrMap.get(name);
-    		
+
     		for( Cytoband cb : chr.getBands() ) {
     		    CytobandElement e = new CytobandElement(cb, cb.getChromosomeNumber() * X_STEP, - chr.getLength() / 2);
-    		    
+
     		    e.addMouseEventCallback( new MouseOverCallback() {
-                    
+
+                    @Override
                     public void run(MouseOverTypes eventtype, Element element) {
                         CytobandElement e = (CytobandElement) element;
 
@@ -89,33 +90,33 @@ public class CytobandView extends Applet {
                             out.setText(e.getName());
                             selected = true;
                             break;
-                            
+
                         case EXISTED:
                             selected = true;
                             break;
-                            
+
                         case EXITED:
                             e.setStroke(false);
                             break;
                         }
-                        
+
                     }
                 });
-    		    
+
         		bandElementList.add(e);
         		elementGroup.add(e);
     		}
     	}
-    	
+
     	elementGroup.setPosition(0, 384);
     	addObject(elementGroup);
 
         f = new Font("San-Serif");
         f.setSize(20);
-        
+
         out = new Text("                                  ", f, 450, 730);
         out.setStrokeColor(ColorSet.WHITE);
-        
+
         addObject(out);
     }
 
@@ -125,6 +126,9 @@ public class CytobandView extends Applet {
             out.setText(TITLE_NAME);
         }
     }
+
+    @Override
+    public void exit() {}
 
     @Override
     public void mouseEvent(MouseEvent e, MouseButton b) {
@@ -141,7 +145,7 @@ public class CytobandView extends Applet {
             }
         }
     }
-    
+
     public static void main(String args[]) {
         AppletRunner.run("jp.xcoo.casmi.cytobandview.view.CytobandView", TITLE_NAME);
     }
