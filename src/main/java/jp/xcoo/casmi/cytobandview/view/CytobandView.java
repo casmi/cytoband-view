@@ -60,8 +60,6 @@ public class CytobandView extends Applet {
 
     private List<CytobandElement> bandElementList = new ArrayList<CytobandElement>();
 
-    boolean selected;
-
     @Override
     public void setup() {
         setSize(1024, 768);
@@ -86,17 +84,13 @@ public class CytobandView extends Applet {
 
                         switch(eventtype) {
                         case ENTERED:
-                            e.setStroke(true);
-                            out.setText(e.getName());
-                            selected = true;
-                            break;
-
-                        case EXISTED:
-                            selected = true;
+                            e.setSelected(true);
                             break;
 
                         case EXITED:
-                            e.setStroke(false);
+                            e.setSelected(false);
+                            break;
+                        default:
                             break;
                         }
 
@@ -122,7 +116,17 @@ public class CytobandView extends Applet {
 
     @Override
     public void update() {
-        if (!selected) {
+        CytobandElement selected = null;
+
+        for (CytobandElement e : bandElementList) {
+            if (e.isSelected()) {
+                selected = e;
+            }
+        }
+
+        if (selected != null) {
+            out.setText(selected.getName());
+        } else {
             out.setText(TITLE_NAME);
         }
     }
@@ -132,9 +136,6 @@ public class CytobandView extends Applet {
 
     @Override
     public void mouseEvent(MouseEvent e, MouseButton b) {
-        if (e == MouseEvent.MOVED) {
-            selected = false;
-        }
     }
 
     @Override

@@ -25,33 +25,35 @@ import casmi.graphics.color.RGBColor;
 import casmi.graphics.element.Rect;
 
 /**
- * rendering object for cytoband 
- * 
+ * rendering object for cytoband
+ *
  * @author K. Nishimura
  * @author Takashi AOKI <federkasten@me.com>
  *
  */
 public class CytobandElement extends Rect {
-	
+
 	private static final double WIDTH = 20;
 	private static final double HEIGHT_RATIO = 0.0000025;
-	
+
+	private boolean selected;
+
 	private Cytoband cb;
 
 	public CytobandElement(Cytoband cb, double baseX, double baseY) {
 	    super(WIDTH, HEIGHT_RATIO * cb.getLength());
-	    
+
 		this.cb = cb;
-		
+
 		this.setX( baseX );
 		this.setY( (cb.getStart() + cb.getLength() / 2.0 + baseY ) * CytobandElement.HEIGHT_RATIO );
-				
+
 		this.setStrokeColor(ColorSet.GHOST_WHITE);
 		this.setStrokeWidth(3);
-		
+
 		this.setStroke(false);
 		this.setFill(true);
-		
+
         if(cb.getColor().equalsIgnoreCase("gpos100")){
             this.setFillColor(new RGBColor(92/255.0, 92/255.0, 81/255.0));
         }else if(cb.getColor().equalsIgnoreCase("gpos")){
@@ -87,5 +89,18 @@ public class CytobandElement extends Rect {
 		}else{
 			return "Chr." + this.cb.getChromosomeNumber() + " " + this.cb.getBand();
 		}
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+        if (this.selected) {
+            this.setStroke(true);
+        } else {
+            this.setStroke(false);
+        }
     }
 }
