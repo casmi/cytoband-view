@@ -31,9 +31,10 @@ import casmi.AppletRunner;
 import casmi.KeyEvent;
 import casmi.MouseButton;
 import casmi.MouseEvent;
+import casmi.callback.MouseOverCallback;
+import casmi.callback.MouseOverEventType;
 import casmi.graphics.color.ColorSet;
 import casmi.graphics.element.Element;
-import casmi.graphics.element.MouseOverCallback;
 import casmi.graphics.element.Text;
 import casmi.graphics.font.Font;
 import casmi.graphics.group.Group;
@@ -79,10 +80,10 @@ public class CytobandView extends Applet {
     		    e.addMouseEventCallback( new MouseOverCallback() {
 
                     @Override
-                    public void run(MouseOverTypes eventtype, Element element) {
+                    public void run(MouseOverEventType eventType, Element element) {
                         CytobandElement e = (CytobandElement) element;
 
-                        switch(eventtype) {
+                        switch(eventType) {
                         case ENTERED:
                             e.setSelected(true);
                             break;
