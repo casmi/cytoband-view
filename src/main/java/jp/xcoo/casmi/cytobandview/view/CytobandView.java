@@ -30,14 +30,14 @@ import casmi.Applet;
 import casmi.AppletRunner;
 import casmi.KeyEvent;
 import casmi.MouseButton;
-import casmi.MouseEvent;
+import casmi.MouseStatus;
 import casmi.callback.MouseOverCallback;
 import casmi.callback.MouseOverEventType;
+import casmi.graphics.canvas.Canvas;
 import casmi.graphics.color.ColorSet;
 import casmi.graphics.element.Element;
 import casmi.graphics.element.Text;
 import casmi.graphics.font.Font;
-import casmi.graphics.group.Group;
 
 /**
  * cytoband view
@@ -68,7 +68,7 @@ public class CytobandView extends Applet {
 
     	final Map<String, Chromosome> chrMap = CytobandLoader.load(REMOTE_DATA_URL);
 
-    	Group elementGroup = new Group();
+    	Canvas elementGroup = new Canvas();
 
     	// build render elements
     	for( String name : Chromosome.CHROMOSOME_NAMES ) {
@@ -104,7 +104,7 @@ public class CytobandView extends Applet {
     	}
 
     	elementGroup.setPosition(0, 384);
-    	addObject(elementGroup);
+    	addCanvas(elementGroup);
 
         f = new Font("San-Serif");
         f.setSize(20);
@@ -136,7 +136,7 @@ public class CytobandView extends Applet {
     public void exit() {}
 
     @Override
-    public void mouseEvent(MouseEvent e, MouseButton b) {
+    public void mouseEvent(MouseStatus e, MouseButton b) {
     }
 
     @Override
