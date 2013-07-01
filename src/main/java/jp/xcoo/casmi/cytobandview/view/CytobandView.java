@@ -28,6 +28,7 @@ import jp.xcoo.casmi.cytobandview.data.Cytoband;
 import jp.xcoo.casmi.cytobandview.net.CytobandLoader;
 import casmi.Applet;
 import casmi.AppletRunner;
+import casmi.CursorMode;
 import casmi.KeyEvent;
 import casmi.MouseButton;
 import casmi.MouseStatus;
@@ -127,8 +128,10 @@ public class CytobandView extends Applet {
 
         if (selected != null) {
             out.setText(selected.getName());
+            setCursor(CursorMode.HAND);
         } else {
             out.setText(TITLE_NAME);
+            setCursor(CursorMode.DEFAULT);
         }
     }
 
